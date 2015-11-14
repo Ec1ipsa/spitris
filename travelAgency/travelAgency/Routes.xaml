@@ -8,27 +8,50 @@
         Title="Маршруты"
         Height="600" Width="850" MinHeight="600" MinWidth="850" MaxHeight="800" MaxWidth="900"
         WindowStartupLocation="CenterScreen" Closing="routes_Closing">
+
     <Grid>
         <!-- columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
 
         <!-- rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="35"/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="AddRouteBtn" Grid.Column="1" Grid.Row="0" 
-            Width="125" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-            FontSize="14" Click="AddRouteBtn_Click">Добавить</Button>
+        <ListView x:Name="routesList" Grid.Column="1" Grid.Row="1"
+                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="Auto" Header="Страна" DisplayMemberBinding="{Binding Country}" />
+                    <GridViewColumn Width="Auto" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
+                    <GridViewColumn Width="Auto" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
+                    <GridViewColumn Width="Auto" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
+                    <GridViewColumn Width="Auto" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
 
-        
+        <Button x:Name="AddRouteBtn" Grid.Column="1" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="AddRouteBtn_Click" Grid.ColumnSpan="2">Добавить</Button>
+
+        <Button x:Name="EditRouteBtn" Grid.Column="2" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="EditRouteBtn_Click" Grid.ColumnSpan="2">Изменить</Button>
+
+        <Button x:Name="DeleteRouteBtn" Grid.Column="3" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="DeleteRouteBtn_Click" Grid.ColumnSpan="2">Удалить</Button>
     </Grid>
 </Window>

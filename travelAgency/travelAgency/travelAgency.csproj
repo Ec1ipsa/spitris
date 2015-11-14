@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="editRoute.xaml.cs">
+      <DependentUpon>editRoute.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Routes.xaml.cs">
       <DependentUpon>Routes.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,10 @@
       <DependentUpon>Tickets.xaml</DependentUpon>
     </Compile>
     <Page Include="Clients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="editRoute.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
