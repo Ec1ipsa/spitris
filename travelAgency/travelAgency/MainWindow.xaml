@@ -5,8 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:travelAgency"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Главное меню" 
+        Width="275" Height="200" MinWidth="275" MinHeight="200" MaxWidth="275" MaxHeight="200" 
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="ClientsBtn" Grid.Column="1" Grid.Row="0" 
+            Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            FontSize="14" Click="ClientsBtn_Click">Клиенты</Button>
+
+        <Button x:Name="RoutesBtn" Grid.Column="1" Grid.Row="1" 
+            Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            FontSize="14" Click="RoutesBtn_Click">Маршруты</Button>
+
+        <Button x:Name="TicketsBtn" Grid.Column="1" Grid.Row="2" 
+            Width="125" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            FontSize="14" Click="TicketsBtn_Click">Путевки</Button>
     </Grid>
 </Window>

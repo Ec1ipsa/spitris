@@ -18,9 +18,33 @@ namespace travelAgency
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindow mainForm;
+
         public MainWindow()
         {
             InitializeComponent();
+            mainForm = this;
+        }
+
+        private void ClientsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var clients = new Clients(mainForm);
+            clients.Show();
+            Hide();
+        }
+
+        private void RoutesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var routes = new Routes(mainForm);
+            routes.Show();
+            Hide();
+        }
+
+        private void TicketsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var tickets = new Tickets(mainForm);
+            tickets.Show();
+            Hide();
         }
     }
 }
