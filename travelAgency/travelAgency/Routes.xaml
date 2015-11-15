@@ -25,7 +25,7 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="35"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -42,16 +42,21 @@
             </ListView.View>
         </ListView>
 
-        <Button x:Name="AddRouteBtn" Grid.Column="1" Grid.Row="3" 
-            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-            FontSize="14" Click="AddRouteBtn_Click" Grid.ColumnSpan="2">Добавить</Button>
 
-        <Button x:Name="EditRouteBtn" Grid.Column="2" Grid.Row="3" 
-            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-            FontSize="14" Click="EditRouteBtn_Click" Grid.ColumnSpan="2">Изменить</Button>
+        <Button x:Name="HotelsBtn" Grid.Column="1" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+            FontSize="14" Click="HotelsBtn_Click" Grid.ColumnSpan="2">Отели</Button>
 
-        <Button x:Name="DeleteRouteBtn" Grid.Column="3" Grid.Row="3" 
+        <Button x:Name="AddRouteBtn" Grid.Column="2" Grid.Row="3" 
             Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
-            FontSize="14" Click="DeleteRouteBtn_Click" Grid.ColumnSpan="2">Удалить</Button>
+            FontSize="14" Click="AddRouteBtn_Click">Добавить</Button>
+
+        <Button x:Name="EditRouteBtn" Grid.Column="3" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="EditRouteBtn_Click">Изменить</Button>
+
+        <Button x:Name="DeleteRouteBtn" Grid.Column="4" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="DeleteRouteBtn_Click">Удалить</Button>
     </Grid>
 </Window>
