@@ -13,9 +13,6 @@ using System.Windows.Shapes;
 
 namespace travelAgency
 {
-    /// <summary>
-    /// Логика взаимодействия для Clients.xaml
-    /// </summary>
     public partial class Clients : Window
     {
         private readonly MainWindow mainWindow;
