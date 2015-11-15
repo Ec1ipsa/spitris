@@ -66,6 +66,7 @@
     <Compile Include="Routes.xaml.cs">
       <DependentUpon>Routes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SQLite.cs" />
     <Compile Include="Tickets.xaml.cs">
       <DependentUpon>Tickets.xaml</DependentUpon>
     </Compile>
