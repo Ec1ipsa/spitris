@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -28,7 +29,7 @@ namespace travelAgency
             public string Climate { get; set; }
             public int Duration { get; set; }
             public string Hotel { get; set; }
-            public int Cost { get; set; }
+            public float Cost { get; set; }
         }
 
         public Routes(MainWindow mainWindow)
@@ -45,10 +46,30 @@ namespace travelAgency
         private void loadRoutes()
         {
             // пример добавления маршрута в таблицу
-            var route = new Route() { Id = 1, Country = "Россия", Climate = "Умеренный", Duration = 14, Hotel = "Урал", Cost = 25000 };
-            routesList.Items.Add(route);
+            //var route1 = new Route() { Id = 1, Country = "Россия", Climate = "Умеренный", Duration = 14, Hotel = "Урал", Cost = 25000 };
+            //routesList.Items.Add(route1);
 
             /* загрузка маршрутов из БД */
+            //string database = Environment.CurrentDirectory + "\\TourFirma.sqlite";
+            //SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0}", database));
+            //connection.Open();
+            //SQLiteCommand query = new SQLiteCommand("SELECT * FROM 'Scopes'", connection);
+            //SQLiteDataReader reader = query.ExecuteReader();
+            SQLite connection = new SQLite();
+            SQLiteDataReader reader = connection.ReadData("SELECT * FROM 'Scopes'");
+            while (reader.Read())
+            {
+                var route = new Route()
+                {
+                    Id = reader.GetInt32(0),
+                    Country = reader.GetString(1),
+                    Climate = reader.GetString(2),
+                    Duration = reader.GetInt32(3),
+                    Cost = reader.GetFloat(4),
+                    Hotel = reader.GetString(5)
+                };
+                routesList.Items.Add(route);
+            }
         }
 
         /* добавление маршрута */
