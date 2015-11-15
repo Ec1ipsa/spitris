@@ -6,9 +6,63 @@
         xmlns:local="clr-namespace:travelAgency"
         mc:Ignorable="d"
         Title="Клиенты"
-        Height="600" Width="850" MinHeight="600" MinWidth="850" MaxHeight="800" MaxWidth="900"
+        Height="600" Width="600" MinHeight="600" MinWidth="600" MaxHeight="800" MaxWidth="600"
         WindowStartupLocation="CenterScreen" Closing="clients_Closing">
     <Grid>
 
+        <!-- columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- search -->
+        <Label Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+            Height="30" FontSize="14" Width="137.027">Поиск по фамилии:</Label>
+
+        <TextBox x:Name="searchBox" Grid.Column="2" Grid.ColumnSpan="2" 
+            Height="30" TextWrapping="Wrap" VerticalAlignment="Bottom"  
+            FontSize="14" Padding="2"/>
+
+        <Button x:Name="searchBtn" Grid.Column="4"
+                Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                FontSize="14" Click="searchBtn_Click">Найти</Button>
+
+        <!-- clients -->
+        <ListView x:Name="clientsList" Grid.Column="1" Grid.Row="2"
+                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4" MouseDoubleClick="clientsList_MouseDoubleClick">
+            <ListView.View>
+                <GridView >
+                    <GridViewColumn Width="170" Header="Фамилия" DisplayMemberBinding="{Binding Surname}" />
+                    <GridViewColumn Width="160" Header="Имя" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Width="180" Header="Отчество" DisplayMemberBinding="{Binding Secname}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button x:Name="AddClientBtn" Grid.Column="2" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="AddClientBtn_Click">Добавить</Button>
+
+        <Button x:Name="EditClientBtn" Grid.Column="3" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="EditClientBtn_Click">Изменить</Button>
+
+        <Button x:Name="DeleteClientBtn" Grid.Column="4" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="DeleteClientBtn_Click">Удалить</Button>
     </Grid>
 </Window>
