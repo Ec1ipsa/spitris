@@ -120,5 +120,10 @@ namespace travelAgency
         {
             mainWindow.Show();
         }
+
+        private void clientsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

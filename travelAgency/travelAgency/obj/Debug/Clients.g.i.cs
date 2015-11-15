@@ -148,6 +148,12 @@ namespace travelAgency {
             return;
             case 4:
             this.clientsList = ((System.Windows.Controls.ListView)(target));
+            
+            #line 46 "..\..\Clients.xaml"
+            this.clientsList.MouseDoubleClick += new System.Windows.Input.MouseButtonEventHandler(this.clientsList_MouseDoubleClick);
+            
+            #line default
+            #line hidden
             return;
             case 5:
             this.AddClientBtn = ((System.Windows.Controls.Button)(target));

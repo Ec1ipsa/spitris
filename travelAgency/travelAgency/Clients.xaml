@@ -43,7 +43,7 @@
 
         <!-- clients -->
         <ListView x:Name="clientsList" Grid.Column="1" Grid.Row="2"
-                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4">
+                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4" MouseDoubleClick="clientsList_MouseDoubleClick">
             <ListView.View>
                 <GridView >
                     <GridViewColumn Width="170" Header="Фамилия" DisplayMemberBinding="{Binding Surname}" />
