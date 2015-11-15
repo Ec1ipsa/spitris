@@ -21,7 +21,7 @@ namespace travelAgency
         private readonly MainWindow mainWindow;
         private Routes routesWindow;
 
-        public class Route
+        private class Route
         {
             public int Id { get; set; }
             public string Country { get; set; }
