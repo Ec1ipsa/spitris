@@ -19,14 +19,14 @@ namespace travelAgency
     public partial class editClient : Window
     {
         private readonly Clients clientsWindow;
-        private int? routeId;
+        private int? clientId;
 
         public editClient(int? id, Clients clientsWindow)
         {
             InitializeComponent();
 
             this.clientsWindow = clientsWindow;
-            routeId = id;
+            clientId = id;
 
             if (id != null)
             {

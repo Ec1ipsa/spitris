@@ -57,12 +57,9 @@
         <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
             Height="25" FontSize="14" Padding="0,0,15,0">Отель</Label>
 
-        <ComboBox x:Name="hotelBox" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" 
+        <TextBox x:Name="hotelBox" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" 
             Height="30" VerticalAlignment="Bottom" 
-            Padding="5" FontSize="14" SelectedIndex="0">
-            <ComboBoxItem Tag="0">Отель 1</ComboBoxItem>
-            <ComboBoxItem Tag="1">Отель 2</ComboBoxItem>
-        </ComboBox>
+            Padding="5,3,5,3" FontSize="14"/>
         
         <!-- Cost -->
         <Label Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" 

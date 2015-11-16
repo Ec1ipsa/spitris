@@ -117,12 +117,6 @@ namespace travelAgency
             }
         }
 
-        /* перейти к отелям */
-        private void HotelsBtn_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         /* вывод вопроса подтверждения */
         private bool Confirm(string text)
         {
