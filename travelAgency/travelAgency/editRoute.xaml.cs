@@ -34,6 +34,17 @@ namespace travelAgency
             if (id != null)
             {
                 /* заполнение полей из БД */
+                SQLite connection = new SQLite();
+                var reader = connection.ReadData(string.Format("SELECT Country, Climat, Duration, Cost, Hotel FROM Scopes WHERE ID = '{0}'", id));
+                while (reader.Read())
+                {
+                    countryBox.Text = reader.GetString(0);
+                    climateBox.Text = reader.GetString(1);
+                    durationBox.Text = reader.GetInt32(2).ToString();
+                    costBox.Text = reader.GetFloat(3).ToString();
+                    hotelBox.Text = reader.GetString(4);
+
+                }
             }
         }
 
@@ -42,7 +53,18 @@ namespace travelAgency
         {
             /* запись в БД */
             SQLite connection = new SQLite();
-            //SQLiteDataReader reader = connection.ReadData(string.Format("INSERT INTO Clients (ID, Surname, Name, Secname, Address, Phone) VALUES ({}, {}, {}, {}, {}, {})", 2, surnameBox.));
+            
+            if (routeId == null)
+            {
+                connection.WriteData(string.Format("INSERT INTO Scopes (Country, Climat, Duration, Cost, Hotel) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", countryBox.Text, climateBox.Text, durationBox.Text, costBox.Text, hotelBox.Text));
+                MessageBox.Show("Маршрут успешно добавлен!");
+            }
+            else
+            {
+                connection.WriteData(string.Format("UPDATE Scopes SET Country = '{0}', Climat = '{1}', Duration = '{2}', Cost = '{3}', Hotel = '{4}' WHERE ID = '{5}'", countryBox.Text, climateBox.Text, durationBox.Text, costBox.Text, hotelBox.Text, routeId));
+                MessageBox.Show("Данные успешно изменены!");
+            }
+            routesWindow.loadRoutes();
         }
 
         /* отмена редактирования маршрута */
