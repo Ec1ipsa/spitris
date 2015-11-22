@@ -42,11 +42,6 @@
             </ListView.View>
         </ListView>
 
-
-        <Button x:Name="HotelsBtn" Grid.Column="1" Grid.Row="3" 
-            Width="110" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
-            FontSize="14" Click="HotelsBtn_Click" Grid.ColumnSpan="2">Отели</Button>
-
         <Button x:Name="AddRouteBtn" Grid.Column="2" Grid.Row="3" 
             Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
             FontSize="14" Click="AddRouteBtn_Click">Добавить</Button>
