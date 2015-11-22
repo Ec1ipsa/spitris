@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -40,6 +41,8 @@ namespace travelAgency
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             /* запись в БД */
+            SQLite connection = new SQLite();
+            //SQLiteDataReader reader = connection.ReadData(string.Format("INSERT INTO Clients (ID, Surname, Name, Secname, Address, Phone) VALUES ({}, {}, {}, {}, {}, {})", 2, surnameBox.));
         }
 
         /* отмена редактирования маршрута */

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -19,18 +20,31 @@ namespace travelAgency
     public partial class editClient : Window
     {
         private readonly Clients clientsWindow;
-        private int? routeId;
+        private int? clientId;
 
         public editClient(int? id, Clients clientsWindow)
         {
             InitializeComponent();
 
             this.clientsWindow = clientsWindow;
-            routeId = id;
+            clientId = id;
 
             if (id != null)
             {
                 /* заполнение полей из БД */
+                SQLite connection = new SQLite();
+                SQLiteDataReader reader = connection.ReadData(string.Format("SELECT Surname, Name, Secname, Address, Phone FROM Clients WHERE ID = '{0}'", clientId));
+                while (reader.Read())
+                {
+                    surnameBox.Text = reader.GetString(0);
+                    nameBox.Text = reader.GetString(1);
+                    if (reader.GetString(2).Count() != 0)
+                        secnameBox.Text = reader.GetString(2);
+                    if (reader.GetString(3).Count() != 0)
+                        adressBox.Text = reader.GetString(3);
+                    if (reader.GetString(4).Count() != 0)
+                        phoneBox.Text = reader.GetString(4); 
+                }
             }
         }
 
@@ -38,6 +52,19 @@ namespace travelAgency
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             /* запись в БД */
+            SQLite connection = new SQLite();
+            if (clientId == null)
+            {
+                connection.WriteData(string.Format("INSERT INTO Clients (Surname, Name, Secname, Address, Phone) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text));
+                MessageBox.Show("Клиент успешно добавлен!");
+            }
+            else
+            {
+                connection.WriteData(string.Format("UPDATE Clients SET Surname = '{0}', Name = '{1}', Secname = '{2}', Address = '{3}', Phone = '{4}' WHERE ID = '{5}'", surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text, clientId));
+                MessageBox.Show("Данные успешно изменены!");
+            }
+            clientsWindow.UpdateClientsList(null);
+            //clientsWindow.clientsList.Items.Add(client);
         }
 
         /* отмена редактирования клиента */

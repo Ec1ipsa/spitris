@@ -29,6 +29,28 @@ namespace travelAgency
             return reader;
             
         }
+        //запись данных
+        public void WriteData(string query)
+        {
+            connection.Open();
+            this.query = new SQLiteCommand(query, connection);
+            this.query.ExecuteNonQuery();
+            connection.Close();
+        }
+        //получение объекта для изменения
+        //public SQLiteDataReader GetItem(int id, string table)
+        //{
+        //    connection.Open();
+        //    if (table == "Clients")
+        //    {
+        //        reader = ReadData(string.Format("SELECT Surname, Name, Secname, Address, Phone FROM Clients WHERE ID = '{0}'", id));
+        //    }
+        //    else if (table == "Routes")
+        //    {
+        //        reader = ReadData(string.Format("SELECT Surname, Name, Secname, Address, Phone FROM Clients WHERE ID = '{0}'", id));
+        //    }
+        //    return reader;
+        //}
     }
     
 }
