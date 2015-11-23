@@ -63,12 +63,18 @@
     <Compile Include="editRoute.xaml.cs">
       <DependentUpon>editRoute.xaml</DependentUpon>
     </Compile>
+    <Compile Include="routeChoice.xaml.cs">
+      <DependentUpon>routeChoice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Routes.xaml.cs">
       <DependentUpon>Routes.xaml</DependentUpon>
     </Compile>
     <Compile Include="SQLite.cs" />
-    <Compile Include="Tickets.xaml.cs">
-      <DependentUpon>Tickets.xaml</DependentUpon>
+    <Compile Include="tourPurchase.xaml.cs">
+      <DependentUpon>tourPurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tours.xaml.cs">
+      <DependentUpon>Tours.xaml</DependentUpon>
     </Compile>
     <Page Include="Clients.xaml">
       <SubType>Designer</SubType>
@@ -97,11 +103,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="routeChoice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Routes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tickets.xaml">
+    <Page Include="tourPurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tours.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +146,9 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="TourFirma.sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\sun.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net20\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net20\System.Data.SQLite.Core.targets')" />
