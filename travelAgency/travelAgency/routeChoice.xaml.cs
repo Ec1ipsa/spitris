@@ -23,6 +23,7 @@ namespace travelAgency
         private readonly Clients clientsWindow;
         private routeChoice routesWindow;
         private int clientId;
+        private string clientName;
         private bool isBack = false;
 
         /* класс объект ListViewItem (климат, страна, отель) для заполнения ListBoxes */
@@ -60,14 +61,16 @@ namespace travelAgency
         }
 
         /* инициализация */
-        public routeChoice(int id, Clients clientsWindow)
+        public routeChoice(int clientId, string clientName, Clients clientsWindow)
         {
             InitializeComponent();
 
             this.clientsWindow = clientsWindow;
             routesWindow = this;
-            clientId = id;
+            this.clientId = clientId;
+            this.clientName = clientName;
 
+            personName.Content += clientName;
             updateClimateList();
             updateCountryList();
             updateHotelList();

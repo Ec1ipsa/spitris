@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -18,14 +19,24 @@ namespace travelAgency
         private readonly MainWindow mainWindow;
         private Clients clientsWindow;
 
+        /* класс клиент */
         private class Client
         {
             public int Id { get; set; }
             public string Surname { get; set; }
             public string Name { get; set; }
             public string Secname { get; set; }
+
+            public Client(int id, string surname, string name, string secname)
+            {
+                Id = id;
+                Surname = surname;
+                Name = name;
+                Secname = secname;
+            }
         }
 
+        /* инициализация */
         public Clients(MainWindow mainWindow)
         {
             InitializeComponent();
@@ -41,16 +52,14 @@ namespace travelAgency
         {
             clientsList.Items.Clear();
 
-            // surname - поиск по фамилии
-            if (surname == null) { } else { }
+            if (surname == null) { surname = ""; } else { surname = string.Format("WHERE Surname LIKE '%{0}%'", surname); }
 
-            // пример добавления клиента в таблицу
-            var client = new Client() { Id = 1, Surname = "Качулин", Name = "Сергей", Secname = "Геннадьевич" };
-            clientsList.Items.Add(client);
-            client = new Client() { Id = 2, Surname = "Гилязева", Name = "Софья", Secname = "Аликовна" };
-            clientsList.Items.Add(client);
-
-            /* загрузка клиентов из БД */
+            SQLite connection = new SQLite();
+            SQLiteDataReader reader = connection.ReadData(string.Format("SELECT ID, Surname, Name, Secname FROM Clients {0} ORDER BY Surname, Name, Secname", surname));
+            while (reader.Read())
+            {
+                clientsList.Items.Add(new Client(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
+            }
         }
 
         /* поиск по фамилии клиента */
@@ -83,7 +92,7 @@ namespace travelAgency
             }
             else
             {
-                MessageBox.Show("Клиент не выбран!");
+                MessageBox.Show("Клиент не выбран!", "Предупреждение", MessageBoxButton.OK);
             }
         }
 
@@ -96,12 +105,14 @@ namespace travelAgency
                 {
                     var id = (clientsList.SelectedItem as Client).Id;
 
-                    /* удаление из БД и таблицы */
+                    SQLite connection = new SQLite();
+                    connection.WriteData(string.Format("DELETE FROM Clients WHERE ID = '{0}'", id));
+                    UpdateClientsList(null);
                 }
             }
             else
             {
-                MessageBox.Show("Клиент не выбран!");
+                MessageBox.Show("Клиент не выбран!", "Предупреждение", MessageBoxButton.OK);
             }
         }
 
@@ -118,18 +129,22 @@ namespace travelAgency
             mainWindow.Show();
         }
 
+        /* выбрать клиента и перейти на форму выбора маршрута */
         private void clientsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (clientsList.SelectedItem != null)
             {
-                var id = (clientsList.SelectedItem as Client).Id;
-                var editClientForm = new routeChoice(id, clientsWindow);
+                var client = clientsList.SelectedItem as Client;
+                var clientId = client.Id;
+                var clientName = client.Surname + " " + client.Name + " " + client.Secname;
+
+                var editClientForm = new routeChoice(clientId, clientName, clientsWindow);
                 editClientForm.Show();
                 Hide();
             }
             else
             {
-                MessageBox.Show("Клиент не выбран!");
+                MessageBox.Show("Клиент не выбран!", "Предупреждение", MessageBoxButton.OK);
             }
         }
     }

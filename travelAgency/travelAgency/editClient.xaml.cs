@@ -22,6 +22,7 @@ namespace travelAgency
         private readonly Clients clientsWindow;
         private int? clientId;
 
+        /* инициализация */
         public editClient(int? id, Clients clientsWindow)
         {
             InitializeComponent();
@@ -31,7 +32,6 @@ namespace travelAgency
 
             if (id != null)
             {
-                /* заполнение полей из БД */
                 SQLite connection = new SQLite();
                 SQLiteDataReader reader = connection.ReadData(string.Format("SELECT Surname, Name, Secname, Address, Phone FROM Clients WHERE ID = '{0}'", clientId));
                 while (reader.Read())
@@ -51,20 +51,23 @@ namespace travelAgency
         /* сохранение клиента */
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
-            /* запись в БД */
             SQLite connection = new SQLite();
+
             if (clientId == null)
             {
-                connection.WriteData(string.Format("INSERT INTO Clients (Surname, Name, Secname, Address, Phone) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text));
-                MessageBox.Show("Клиент успешно добавлен!");
+                connection.WriteData(string.Format("INSERT INTO Clients (Surname, Name, Secname, Address, Phone) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", 
+                    surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text));
+                MessageBox.Show("Клиент успешно добавлен!");                
             }
             else
             {
-                connection.WriteData(string.Format("UPDATE Clients SET Surname = '{0}', Name = '{1}', Secname = '{2}', Address = '{3}', Phone = '{4}' WHERE ID = '{5}'", surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text, clientId));
-                MessageBox.Show("Данные успешно изменены!");
+                connection.WriteData(string.Format("UPDATE Clients SET Surname = '{0}', Name = '{1}', Secname = '{2}', Address = '{3}', Phone = '{4}' WHERE ID = '{5}'", 
+                    surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text, clientId));
+                MessageBox.Show("Изменения успешно внесены!");
             }
-            clientsWindow.UpdateClientsList(null);
-            //clientsWindow.clientsList.Items.Add(client);
+
+            Close();
+            clientsWindow.UpdateClientsList(null);            
         }
 
         /* отмена редактирования клиента */

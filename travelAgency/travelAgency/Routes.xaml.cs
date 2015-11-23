@@ -25,11 +25,21 @@ namespace travelAgency
         private class Route
         {
             public int Id { get; set; }
-            public string Country { get; set; }
             public string Climate { get; set; }
-            public int Duration { get; set; }
+            public string Country { get; set; }
             public string Hotel { get; set; }
+            public int Duration { get; set; }
             public float Cost { get; set; }
+
+            public Route(int id, string climate, string country, string hotel, int duration, float cost)
+            {
+                Id = id;
+                Climate = climate;
+                Country = country;
+                Hotel = hotel;
+                Duration = duration;
+                Cost = cost;
+            }
         }
 
         public Routes(MainWindow mainWindow)
@@ -45,31 +55,13 @@ namespace travelAgency
         /* вывод маршрутов из БД в таблицу */
         public void loadRoutes()
         {
-            // пример добавления маршрута в таблицу
-            //var route1 = new Route() { Id = 1, Country = "Россия", Climate = "Умеренный", Duration = 14, Hotel = "Урал", Cost = 25000 };
-            //routesList.Items.Add(route1);
-
-            /* загрузка маршрутов из БД */
-            //string database = Environment.CurrentDirectory + "\\TourFirma.sqlite";
-            //SQLiteConnection connection = new SQLiteConnection(string.Format("Data Source={0}", database));
-            //connection.Open();
-            //SQLiteCommand query = new SQLiteCommand("SELECT * FROM 'Scopes'", connection);
-            //SQLiteDataReader reader = query.ExecuteReader();
             routesList.Items.Clear();
+
             SQLite connection = new SQLite();
-            SQLiteDataReader reader = connection.ReadData("SELECT * FROM 'Scopes'");
+            SQLiteDataReader reader = connection.ReadData("SELECT ID, Climat, Country, Hotel, Duration, Cost FROM Scopes ORDER BY Climat, Country, Hotel, Duration, Cost");
             while (reader.Read())
             {
-                var route = new Route()
-                {
-                    Id = reader.GetInt32(0),
-                    Country = reader.GetString(1),
-                    Climate = reader.GetString(2),
-                    Duration = reader.GetInt32(3),
-                    Cost = reader.GetFloat(4),
-                    Hotel = reader.GetString(5)
-                };
-                routesList.Items.Add(route);
+                routesList.Items.Add(new Route(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetFloat(5)));
             }
         }
 
@@ -96,7 +88,7 @@ namespace travelAgency
             }
             else
             {
-                MessageBox.Show("Маршрут не выбран!");
+                MessageBox.Show("Маршрут не выбран!", "Предупреждение", MessageBoxButton.OK);
             }
         }
 
@@ -109,15 +101,14 @@ namespace travelAgency
                 {
                     var id = (routesList.SelectedItem as Route).Id;
 
-                    /* удаление из БД и таблицы */
                     SQLite connection = new SQLite();
-                    connection.WriteData(string.Format("DELETE FROM Scopes WHERE `ID` = '{0}'", id));
+                    connection.WriteData(string.Format("DELETE FROM Scopes WHERE ID = '{0}'", id));
                     loadRoutes();
                 }
             }
             else
             {
-                MessageBox.Show("Маршрут не выбран!");
+                MessageBox.Show("Маршрут не выбран!", "Предупреждение", MessageBoxButton.OK);
             }
         }
 
@@ -134,6 +125,9 @@ namespace travelAgency
             mainWindow.Show();
         }
 
-        
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

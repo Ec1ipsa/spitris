@@ -6,10 +6,14 @@
         xmlns:local="clr-namespace:travelAgency"
         mc:Ignorable="d"
         Title="Маршруты"
-        Height="600" Width="850" MinHeight="600" MinWidth="850" MaxHeight="800" MaxWidth="900"
+        Height="600" Width="900" MinHeight="600" MinWidth="900" MaxHeight="800" MaxWidth="900"
         WindowStartupLocation="CenterScreen" Closing="routes_Closing">
+    
+    <Window.Background>
+        <ImageBrush ImageSource="/images/route.jpg"></ImageBrush>
+    </Window.Background>
 
-    <Grid>
+    <Grid Background="#66FFFFFF">
         <!-- columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
@@ -29,15 +33,15 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="routesList" Grid.Column="1" Grid.Row="1"
-                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4">
+        <ListView x:Name="routesList" Grid.Column="1" Grid.Row="1" Background="#EEFFFFFF"
+                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4" MouseDoubleClick="EditRouteBtn_Click">
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Width="Auto" Header="Страна" DisplayMemberBinding="{Binding Country}" />
-                    <GridViewColumn Width="Auto" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
-                    <GridViewColumn Width="Auto" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
-                    <GridViewColumn Width="Auto" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
-                    <GridViewColumn Width="Auto" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
+                    <GridViewColumn Width="175" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
+                    <GridViewColumn Width="150" Header="Страна" DisplayMemberBinding="{Binding Country}" />
+                    <GridViewColumn Width="240" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
+                    <GridViewColumn Width="120" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
+                    <GridViewColumn Width="120" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
                 </GridView>
             </ListView.View>
         </ListView>
@@ -53,5 +57,9 @@
         <Button x:Name="DeleteRouteBtn" Grid.Column="4" Grid.Row="3" 
             Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
             FontSize="14" Click="DeleteRouteBtn_Click">Удалить</Button>
+
+        <Button x:Name="BackBtn" Grid.Column="1" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+            FontSize="14" Click="BackBtn_Click">Назад</Button>
     </Grid>
 </Window>
