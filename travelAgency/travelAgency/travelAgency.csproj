@@ -145,6 +145,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="TourFirma.sqlite" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\sun.jpg" />
