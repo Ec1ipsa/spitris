@@ -37,7 +37,7 @@ namespace travelAgency
         }
 
         /* вывод клиентов из БД в таблицу */
-        private void UpdateClientsList(string surname)
+        public void UpdateClientsList(string surname)
         {
             clientsList.Items.Clear();
 
