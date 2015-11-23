@@ -1,0 +1,160 @@
+﻿<Window x:Class="travelAgency.routeChoice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:travelAgency"
+        xmlns:local="clr-namespace:travelAgency"
+        mc:Ignorable="d"
+        Title="Выбор маршрута" 
+        Height="600" Width="900" MinHeight="600" MinWidth="900" MaxHeight="600" MaxWidth="900"
+        WindowStartupLocation="CenterScreen" Closing="routes_Closing">
+
+    <Window.Background>
+        <ImageBrush ImageSource="/images/sun.jpg"></ImageBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <!-- стиль для констант -->
+        <Style x:Key="labelStyle" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="15,0,15,0" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <!-- стиль для такстбоксов -->
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Padding" Value="5,3,5,3" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="#66FFFFFF" >
+        <!-- columns -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="125"/>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <!-- ФИО -->
+        <Label x:Name="personName" Grid.Column="1" Grid.ColumnSpan="10" Grid.Row="0" 
+               Style="{StaticResource labelStyle}" Padding="0">
+            Выбор путевки для клиента: Гилязева Софья Аликовна
+        </Label>
+
+        <Border Grid.Column="1" Grid.ColumnSpan="10" Grid.Row="1" Grid.RowSpan="5" Margin="0,-10,0,-20"
+                BorderBrush="#4E87D4" BorderThickness="1" Background="#EEFAFAFA" />
+
+        <!-- блок выбора климата -->
+        <Label Grid.Column="2" Grid.Row="1" Style="{StaticResource labelStyle}" Margin="0,2.5">Климат</Label>
+
+        <ListBox x:Name="ClimateListBox" Grid.Column="2" Grid.Row="2" 
+                 BorderBrush="#ccc" FontSize="14" Grid.RowSpan="4">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding Title}" IsChecked="{Binding IsChecked, Mode=TwoWay}" Click="ClimateCheckBox_Click"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- блок выбора страны -->
+        <Label Grid.Column="4" Grid.Row="1" Style="{StaticResource labelStyle}" Margin="0,2.5">Страна</Label>
+
+        <ListBox x:Name="CountryListBox" Grid.Column="4" Grid.Row="2" 
+                 BorderBrush="#ccc" FontSize="14" Grid.RowSpan="4">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding Title}" IsChecked="{Binding IsChecked, Mode=TwoWay}" Click="CountryCheckBox_Click"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- блок выбора отеля -->
+        <Label Grid.Column="6" Grid.Row="1" Style="{StaticResource labelStyle}" Margin="0,2.5">Отель</Label>
+
+        <ListBox x:Name="HotelListBox" Grid.Column="6" Grid.Row="2" 
+                 BorderBrush="#ccc" FontSize="14" Grid.RowSpan="4">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding Title}" IsChecked="{Binding IsChecked, Mode=TwoWay}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!-- Интервал длительности -->
+        <Label Grid.Column="8" Grid.Row="1" Style="{StaticResource labelStyle}" Margin="0,2.5">Длительность</Label>
+        <Label Grid.Column="8" Grid.Row="2" Style="{StaticResource labelStyle}" Margin="0,12.5">от</Label>
+        <Label Grid.Column="9" Grid.Row="2" Style="{StaticResource labelStyle}" Margin="0,12.5">до</Label>
+
+        <TextBox x:Name="minDurationBox" Grid.Column="8" Grid.Row="2" Style="{StaticResource textBoxStyle}" Margin="0,10"/>
+        <TextBox x:Name="maxDurationBox" Grid.Column="9" Grid.Row="2" Style="{StaticResource textBoxStyle}" Margin="0,10"/>
+
+        <!-- интервал стоимости -->
+        <Label Grid.Column="8" Grid.Row="3" Style="{StaticResource labelStyle}" Margin="0,2.5">Стоимость</Label>
+        <Label Grid.Column="8" Grid.Row="4" Style="{StaticResource labelStyle}" Margin="0,12.5">от</Label>
+        <Label Grid.Column="9" Grid.Row="4" Style="{StaticResource labelStyle}" Margin="0,12.5">до</Label>
+
+        <TextBox x:Name="minCostBox" Grid.Column="8" Grid.Row="4" Style="{StaticResource textBoxStyle}" Margin="0,10"/>
+        <TextBox x:Name="maxCostBox" Grid.Column="9" Grid.Row="4" Style="{StaticResource textBoxStyle}" Margin="0,10"/>
+
+        <!-- кнопка поиска -->
+        <Button x:Name="findRouteBtn" Grid.Column="9" Grid.Row="5" 
+            Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="findRouteBtn_Click">Найти</Button>
+
+        <!-- список маршрутов -->
+        <ListView x:Name="routesList" Grid.Column="1" Grid.ColumnSpan="10" Grid.Row="7"
+                 BorderBrush="#4E87D4" Background="#EEFFFFFF" FontSize="14" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="175" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
+                    <GridViewColumn Width="150" Header="Страна" DisplayMemberBinding="{Binding Country}" />
+                    <GridViewColumn Width="240" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
+                    <GridViewColumn Width="120" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />                    
+                    <GridViewColumn Width="120" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- кнопка отката назад -->
+        <Button x:Name="BackBtn" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" 
+            Width="120" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+            FontSize="14" Click="BackBtn_Click">Назад</Button>
+
+        <!-- кнопка выбора маршрута -->
+        <Button x:Name="selectRouteBtn" Grid.Column="9" Grid.ColumnSpan="2" Grid.Row="8" 
+            Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="selectRouteBtn_Click">Выбрать</Button>
+    </Grid>
+</Window>

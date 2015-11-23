@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -25,8 +24,6 @@ namespace travelAgency
             public string Surname { get; set; }
             public string Name { get; set; }
             public string Secname { get; set; }
-            public string Address { get; set; }
-            public string Phone { get; set; }
         }
 
         public Clients(MainWindow mainWindow)
@@ -40,34 +37,21 @@ namespace travelAgency
         }
 
         /* вывод клиентов из БД в таблицу */
-        public void UpdateClientsList(string surname)
+        private void UpdateClientsList(string surname)
         {
             clientsList.Items.Clear();
 
             // surname - поиск по фамилии
-            if (surname == null) { surname = "WHERE 1"; } else { surname = string.Format("WHERE `Surname` LIKE '{0}'", surname); }
+            if (surname == null) { } else { }
 
             // пример добавления клиента в таблицу
-            //var client = new Client() { Id = 1, Surname = "Качулин", Name = "Сергей", Secname = "Геннадьевич"};
-            //clientsList.Items.Add(client);
-            //client = new Client() { Id = 2, Surname = "Гилязева", Name = "Софья", Secname = "Аликовна" };
-            //clientsList.Items.Add(client);
+            var client = new Client() { Id = 1, Surname = "Качулин", Name = "Сергей", Secname = "Геннадьевич" };
+            clientsList.Items.Add(client);
+            client = new Client() { Id = 2, Surname = "Гилязева", Name = "Софья", Secname = "Аликовна" };
+            clientsList.Items.Add(client);
 
             /* загрузка клиентов из БД */
-            SQLite connection = new SQLite();
-            SQLiteDataReader reader = connection.ReadData(string.Format("SELECT * FROM 'Clients' {0}", surname));
-            while (reader.Read())
-            {
-                var client = new Client()
-                {
-                    Id = reader.GetInt32(0),
-                    Surname = reader.GetString(1),
-                    Name = reader.GetString(2),
-                    Secname = reader.GetString(3)
-                };
-                clientsList.Items.Add(client);
-            }
-        }        
+        }
 
         /* поиск по фамилии клиента */
         private void searchBtn_Click(object sender, RoutedEventArgs e)
@@ -113,9 +97,6 @@ namespace travelAgency
                     var id = (clientsList.SelectedItem as Client).Id;
 
                     /* удаление из БД и таблицы */
-                    SQLite connection = new SQLite();
-                    connection.WriteData(string.Format("DELETE FROM Clients WHERE `ID` = '{0}'", id));
-                    UpdateClientsList(null);
                 }
             }
             else
@@ -139,9 +120,17 @@ namespace travelAgency
 
         private void clientsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (clientsList.SelectedItem != null)
+            {
+                var id = (clientsList.SelectedItem as Client).Id;
+                var editClientForm = new routeChoice(id, clientsWindow);
+                editClientForm.Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Клиент не выбран!");
+            }
         }
-
-        
     }
 }

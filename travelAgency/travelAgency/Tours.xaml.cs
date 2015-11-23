@@ -14,19 +14,22 @@ using System.Windows.Shapes;
 namespace travelAgency
 {
     /// <summary>
-    /// Логика взаимодействия для Tickets.xaml
+    /// Логика взаимодействия для Tours.xaml
     /// </summary>
-    public partial class Tickets : Window
+    public partial class Tours : Window
     {
         private readonly MainWindow mainWindow;
+        private Tours toursWindow;
 
-        public Tickets(MainWindow mainWindow)
+        public Tours(MainWindow mainWindow)
         {
             InitializeComponent();
+
             this.mainWindow = mainWindow;
+            toursWindow = this;
         }
 
-        private void tickets_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void tours_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             mainWindow.Show();
         }

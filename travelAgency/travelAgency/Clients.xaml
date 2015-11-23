@@ -6,10 +6,14 @@
         xmlns:local="clr-namespace:travelAgency"
         mc:Ignorable="d"
         Title="Клиенты"
-        Height="600" Width="600" MinHeight="600" MinWidth="600" MaxHeight="800" MaxWidth="600"
+        Height="500" Width="600" MinHeight="500" MinWidth="600" MaxHeight="700" MaxWidth="800"
         WindowStartupLocation="CenterScreen" Closing="clients_Closing">
-    <Grid>
 
+    <Window.Background>
+        <ImageBrush ImageSource="/images/sun.jpg"></ImageBrush>
+    </Window.Background>
+
+    <Grid Background="#66FFFFFF">
         <!-- columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
@@ -31,7 +35,7 @@
 
         <!-- search -->
         <Label Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-            Height="30" FontSize="14" Width="137.027">Поиск по фамилии:</Label>
+            Height="30" FontSize="14" >Поиск по фамилии:</Label>
 
         <TextBox x:Name="searchBox" Grid.Column="2" Grid.ColumnSpan="2" 
             Height="30" TextWrapping="Wrap" VerticalAlignment="Bottom"  
@@ -42,7 +46,7 @@
                 FontSize="14" Click="searchBtn_Click">Найти</Button>
 
         <!-- clients -->
-        <ListView x:Name="clientsList" Grid.Column="1" Grid.Row="2"
+        <ListView x:Name="clientsList" Grid.Column="1" Grid.Row="2" Background="#EEFFFFFF"
                  BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4" MouseDoubleClick="clientsList_MouseDoubleClick">
             <ListView.View>
                 <GridView >
