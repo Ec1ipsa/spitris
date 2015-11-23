@@ -45,13 +45,13 @@ namespace travelAgency
             if (surname == null) { } else { }
 
             // пример добавления клиента в таблицу
-            var client = new Client() { Id = 1, Surname = "Качулин", Name = "Сергей", Secname = "Геннадьевич"};
+            var client = new Client() { Id = 1, Surname = "Качулин", Name = "Сергей", Secname = "Геннадьевич" };
             clientsList.Items.Add(client);
             client = new Client() { Id = 2, Surname = "Гилязева", Name = "Софья", Secname = "Аликовна" };
             clientsList.Items.Add(client);
 
             /* загрузка клиентов из БД */
-        }        
+        }
 
         /* поиск по фамилии клиента */
         private void searchBtn_Click(object sender, RoutedEventArgs e)
@@ -120,7 +120,17 @@ namespace travelAgency
 
         private void clientsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            if (clientsList.SelectedItem != null)
+            {
+                var id = (clientsList.SelectedItem as Client).Id;
+                var editClientForm = new routeChoice(id, clientsWindow);
+                editClientForm.Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show("Клиент не выбран!");
+            }
         }
     }
 }

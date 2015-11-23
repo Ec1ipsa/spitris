@@ -42,8 +42,8 @@ namespace travelAgency
 
         private void TicketsBtn_Click(object sender, RoutedEventArgs e)
         {
-            var tickets = new Tickets(mainWindow);
-            tickets.Show();
+            var tours = new Tours(mainWindow);
+            tours.Show();
             Hide();
         }
     }
