@@ -30,13 +30,14 @@
                  BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4">
             <ListView.View>
                 <GridView >
-                    <GridViewColumn Width="Auto" Header="Клиент" DisplayMemberBinding="{Binding Country}" />
+                    <GridViewColumn Width="Auto" Header="Клиент" DisplayMemberBinding="{Binding Client}" />
                     <GridViewColumn Width="Auto" Header="Страна" DisplayMemberBinding="{Binding Country}" />
                     <GridViewColumn Width="Auto" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
                     <GridViewColumn Width="Auto" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
                     <GridViewColumn Width="Auto" Header="Дата отправления" DisplayMemberBinding="{Binding Date}" />
                     <GridViewColumn Width="Auto" Header="Количество" DisplayMemberBinding="{Binding Count}" />
-                    <GridViewColumn Width="Auto" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
+                    <GridViewColumn Width="Auto" Header="Скидка" DisplayMemberBinding="{Binding Discount}" />
+                    <GridViewColumn Width="Auto" Header="Стоимость" DisplayMemberBinding="{Binding Price}" />
                 </GridView>
             </ListView.View>
         </ListView>

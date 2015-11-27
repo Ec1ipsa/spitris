@@ -17,12 +17,13 @@ namespace travelAgency
         {
             database = Environment.CurrentDirectory + "\\TourFirma.sqlite";
             connection = new SQLiteConnection(string.Format("Data Source={0}", database));
-            
+            connection.Open();
+
         }
         //чтение данных
         public SQLiteDataReader ReadData(string query)
         {
-            connection.Open();
+            
             this.query = new SQLiteCommand(query, connection);
             reader = this.query.ExecuteReader();
             //connection.Close();
@@ -32,7 +33,7 @@ namespace travelAgency
         //запись данных
         public void WriteData(string query)
         {
-            connection.Open();
+            //connection.Open();
             this.query = new SQLiteCommand(query, connection);
             this.query.ExecuteNonQuery();
             connection.Close();
