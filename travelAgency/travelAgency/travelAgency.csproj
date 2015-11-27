@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>_png.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -63,13 +66,14 @@
     <Compile Include="editRoute.xaml.cs">
       <DependentUpon>editRoute.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HelpClasses\Route.cs" />
     <Compile Include="routeChoice.xaml.cs">
       <DependentUpon>routeChoice.xaml</DependentUpon>
     </Compile>
     <Compile Include="Routes.xaml.cs">
       <DependentUpon>Routes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SQLite.cs" />
+    <Compile Include="HelpClasses\SQLite.cs" />
     <Compile Include="tourPurchase.xaml.cs">
       <DependentUpon>tourPurchase.xaml</DependentUpon>
     </Compile>
@@ -152,6 +156,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\route.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="_png.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\_png.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.98.1\build\net20\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.98.1\build\net20\System.Data.SQLite.Core.targets')" />
