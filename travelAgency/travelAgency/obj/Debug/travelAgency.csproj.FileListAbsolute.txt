@@ -60,3 +60,4 @@ C:\Users\admin\Source\Repos\spitris4\travelAgency\travelAgency\obj\Debug\travelA
 C:\Users\admin\Source\Repos\spitris4\travelAgency\travelAgency\obj\Debug\travelAgency.csproj.GenerateResource.Cache
 C:\Users\admin\Source\Repos\spitris4\travelAgency\travelAgency\obj\Debug\travelAgency.exe
 C:\Users\admin\Source\Repos\spitris4\travelAgency\travelAgency\obj\Debug\travelAgency.pdb
+C:\Users\admin\Source\Repos\spitris4\travelAgency\travelAgency\bin\Debug\travelAgency.pdb
