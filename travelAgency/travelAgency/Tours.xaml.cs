@@ -83,6 +83,7 @@ namespace travelAgency
                     reader.GetFloat(6)));
 
             }
+            connection.Close();
         }
 
         private void tours_Closing(object sender, System.ComponentModel.CancelEventArgs e)

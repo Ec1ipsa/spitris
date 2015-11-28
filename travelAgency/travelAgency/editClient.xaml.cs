@@ -54,21 +54,32 @@ namespace travelAgency
         {
             SQLite connection = new SQLite();
 
-            if (clientId == null)
+            if (checkFull())
             {
-                connection.WriteData(string.Format("INSERT INTO Clients (Surname, Name, Secname, Address, Phone) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", 
-                    surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text));
-                MessageBox.Show("Клиент успешно добавлен!");                
-            }
-            else
-            {
-                connection.WriteData(string.Format("UPDATE Clients SET Surname = '{0}', Name = '{1}', Secname = '{2}', Address = '{3}', Phone = '{4}' WHERE ID = '{5}'", 
-                    surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text, clientId));
-                MessageBox.Show("Изменения успешно внесены!");
-            }
+                if (clientId == null)
+                {
+                    connection.WriteData(string.Format("INSERT INTO Clients (Surname, Name, Secname, Address, Phone) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",
+                        surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text));
+                    MessageBox.Show("Клиент успешно добавлен!", "Предупреждение", MessageBoxButton.OK);
+                }
+                else
+                {
+                    connection.WriteData(string.Format("UPDATE Clients SET Surname = '{0}', Name = '{1}', Secname = '{2}', Address = '{3}', Phone = '{4}' WHERE ID = '{5}'",
+                        surnameBox.Text, nameBox.Text, secnameBox.Text, adressBox.Text, phoneBox.Text, clientId));
+                    MessageBox.Show("Изменения успешно внесены!", "Предупреждение", MessageBoxButton.OK);
+                }
 
-            Close();
-            clientsWindow.UpdateClientsList(null);            
+                Close();
+                clientsWindow.UpdateClientsList(null);    
+            } 
+            else MessageBox.Show("Заполните все поля!", "Предупреждение", MessageBoxButton.OK);
+        }
+        //проверка всех текстбоксов на пустоту
+        private bool checkFull()
+        {
+            if (Check.checkFullItem(surnameBox) && Check.checkFullItem(nameBox) && Check.checkFullItem(secnameBox) && Check.checkFullItem(phoneBox) && Check.checkFullItem(adressBox))
+                return true;
+            return false;
         }
 
         /* отмена редактирования клиента */

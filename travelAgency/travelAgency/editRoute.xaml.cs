@@ -49,22 +49,44 @@ namespace travelAgency
         private void SaveBtn_Click(object sender, RoutedEventArgs e)
         {
             SQLite connection = new SQLite();
-            
-            if (routeId == null)
+
+            if (checkFull())
             {
-                connection.WriteData(string.Format("INSERT INTO Scopes (Country, Climat, Duration, Cost, Hotel) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", 
-                    countryBox.Text, climateBox.Text, durationBox.Text, costBox.Text, hotelBox.Text));
-                MessageBox.Show("Маршрут успешно добавлен!");
+                if (Check.checkNumber(durationBox.Text))
+                {
+                    if (Check.checkFloatNumber(costBox.Text))
+                    {
+                        if (routeId == null)
+                        {
+                            connection.WriteData(string.Format("INSERT INTO Scopes (Country, Climat, Duration, Cost, Hotel) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')",
+                                countryBox.Text, climateBox.Text, int.Parse(durationBox.Text), float.Parse(costBox.Text), hotelBox.Text));
+                            MessageBox.Show("Маршрут успешно добавлен!", "Предупреждение", MessageBoxButton.OK);
+                        }
+                        else
+                        {
+                            connection.WriteData(string.Format("UPDATE Scopes SET Country = '{0}', Climat = '{1}', Duration = '{2}', Cost = '{3}', Hotel = '{4}' WHERE ID = '{5}'",
+                                countryBox.Text, climateBox.Text, int.Parse(durationBox.Text), float.Parse(costBox.Text), hotelBox.Text, routeId));
+                            MessageBox.Show("Изменения успешно внесены!", "Предупреждение", MessageBoxButton.OK);
+                        }
+                        Close();
+                        routesWindow.loadRoutes();
+                    }
+                    else
+                    {
+                        MessageBox.Show("В поле \"Стоимость\" должно быть введено число!", "Предупреждение", MessageBoxButton.OK);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("В поле \"Длительность\" должно быть введено целое число!", "Предупреждение", MessageBoxButton.OK);
+                } 
             }
             else
             {
-                connection.WriteData(string.Format("UPDATE Scopes SET Country = '{0}', Climat = '{1}', Duration = '{2}', Cost = '{3}', Hotel = '{4}' WHERE ID = '{5}'", 
-                    countryBox.Text, climateBox.Text, durationBox.Text, costBox.Text, hotelBox.Text, routeId));
-                MessageBox.Show("Изменения успешно внесены!");
+                MessageBox.Show("Заполните все поля!", "Предупреждение", MessageBoxButton.OK);
             }
 
-            Close();
-            routesWindow.loadRoutes();
+            
         }
 
         /* отмена редактирования маршрута */
@@ -72,5 +94,17 @@ namespace travelAgency
         {
             Close();
         }
+
+        
+
+        
+        //проверить все текстбоксы на пустоту
+        private bool checkFull()
+        {
+            if (Check.checkFullItem(countryBox) && Check.checkFullItem(climateBox) && Check.checkFullItem(durationBox) && Check.checkFullItem(hotelBox) && Check.checkFullItem(costBox))
+                return true;
+            return false;
+        }
+        
     }
 }

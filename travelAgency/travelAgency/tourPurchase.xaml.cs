@@ -23,26 +23,6 @@ namespace travelAgency
         private readonly int routeId;
         private readonly int clientId;
 
-        /* класс маршрут */
-        //private class Route
-        //{
-        //    public int Id { get; set; }
-        //    public string Climate { get; set; }
-        //    public string Country { get; set; }
-        //    public string Hotel { get; set; }
-        //    public int Duration { get; set; }
-        //    public float Cost { get; set; }
-
-        //    public Route(int id, string climate, string country, string hotel, int duration, float cost)
-        //    {
-        //        Id = id;
-        //        Climate = climate;
-        //        Country = country;
-        //        Hotel = hotel;
-        //        Duration = duration;
-        //        Cost = cost;
-        //    }
-        //}
 
         public tourPurchase(int routeId, routeChoice routesWindow, int clientId)
         {
@@ -78,32 +58,48 @@ namespace travelAgency
         private void sellTourBtn_Click(object sender, RoutedEventArgs e)
         {
             SQLite connection = new SQLite();
-            connection.WriteData(string.Format("INSERT INTO Tours (SID, CID, Date, Count, Discount, Price) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", routeId, clientId, dateBox.Text, countBox.Text, discountBox.Text, priceBox.Text));
-            MessageBox.Show("Путевка успешно добавлена!");
+            if (checkFull())
+            {
+                if (Check.checkFloatNumber(priceBox.Text))
+                {
+
+                    connection.WriteData(string.Format("INSERT INTO Tours (SID, CID, Date, Count, Discount, Price) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", routeId, clientId, dateBox.Text, int.Parse(countBox.Text), discountBox.Text, float.Parse(priceBox.Text)));
+                    MessageBox.Show("Путевка успешно добавлена!", "Предупреждение", MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox.Show("В поле \"Стоимость\" должно быть введено число!", "Предупреждение", MessageBoxButton.OK);
+                } 
+            }
+            else
+            {
+                MessageBox.Show("Заполните все поля!", "Предупреждение", MessageBoxButton.OK);
+            }
+        }
+
+        private bool checkFull()
+        {
+            if (Check.checkFullItem(dateBox) && Check.checkFullItem(countBox) && Check.checkFullItem(discountBox) && Check.checkFullItem(priceBox))
+                return true;
+            return false;
         }
 
         private void countBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (checkNumber(countBox.Text))
+            if (Check.checkNumber(countBox.Text))
             {
-                int number;
-                var result = int.TryParse(countBox.Text, out number);
+                int number = int.Parse(countBox.Text);
+                //var result = int.TryParse(countBox.Text, out number);
                 Route route = (Route)routesList.Items[0];
                 priceBox.Text = (number * route.Cost).ToString();
             }
+            else
+            {
+                MessageBox.Show("В поле \"Количество\" должно быть введено целое число!", "Предупреждение", MessageBoxButton.OK);
+            }
         }
 
-        /* проверка на целое положительное число */
-        //сперла из маршрутов
-        private bool checkNumber(string text)
-        {
-            int number;
-            bool result = Int32.TryParse(text, out number);
-
-            if (result)
-                if (number >= 0) return true;
-            return false;
-        }
+       
 
         private void tours_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {

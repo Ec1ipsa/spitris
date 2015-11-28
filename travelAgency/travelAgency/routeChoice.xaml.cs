@@ -135,13 +135,13 @@ namespace travelAgency
 
             // считываем диапазон длительности
             var duration = "";
-            if (checkNumber(minDurationBox.Text)) { duration += string.Format(" AND duration >= '{0}'", minDurationBox.Text); }
-            if (checkNumber(maxDurationBox.Text)) { duration += string.Format(" AND duration <= '{0}'", maxDurationBox.Text); }
+            if (Check.checkNumber(minDurationBox.Text)) { duration += string.Format(" AND duration >= '{0}'", minDurationBox.Text); }
+            if (Check.checkNumber(maxDurationBox.Text)) { duration += string.Format(" AND duration <= '{0}'", maxDurationBox.Text); }
 
             // считываем диапазон цен
             var cost = "";
-            if (checkNumber(minCostBox.Text)) { cost += string.Format(" AND cost >= '{0}'", minCostBox.Text); }
-            if (checkNumber(maxCostBox.Text)) { cost += string.Format(" AND cost <= '{0}'", maxCostBox.Text); }
+            if (Check.checkNumber(minCostBox.Text)) { cost += string.Format(" AND cost >= '{0}'", minCostBox.Text); }
+            if (Check.checkNumber(maxCostBox.Text)) { cost += string.Format(" AND cost <= '{0}'", maxCostBox.Text); }
 
             var query = string.Format("SELECT ID, Country, Climat, Hotel, Duration, Cost FROM Scopes WHERE 1 {0} {1} {2} {3} {4}",
                 climateArr, countriesArr, hotelsArr, duration, cost);
@@ -216,15 +216,6 @@ namespace travelAgency
             return arr += ")";
         }
 
-        /* проверка на целое положительное число */
-        private bool checkNumber(string text)
-        {
-            int number;
-            bool result = Int32.TryParse(text, out number);
-
-            if (result)
-                if (number >= 0) return true;
-            return false;
-        }
+        
     }
 }

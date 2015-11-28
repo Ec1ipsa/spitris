@@ -61,6 +61,7 @@ namespace travelAgency
             {
                 clientsList.Items.Add(new Client(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3)));
             }
+            connection.Close();
         }
 
         /* поиск по фамилии клиента */

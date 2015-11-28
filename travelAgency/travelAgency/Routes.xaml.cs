@@ -64,6 +64,7 @@ namespace travelAgency
             {
                 routesList.Items.Add(new Route(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetFloat(5)));
             }
+            connection.Close();
         }
 
         /* добавление маршрута */

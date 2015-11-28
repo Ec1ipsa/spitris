@@ -66,6 +66,7 @@
     <Compile Include="editRoute.xaml.cs">
       <DependentUpon>editRoute.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HelpClasses\Check.cs" />
     <Compile Include="HelpClasses\Route.cs" />
     <Compile Include="routeChoice.xaml.cs">
       <DependentUpon>routeChoice.xaml</DependentUpon>
