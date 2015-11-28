@@ -79,55 +79,58 @@ namespace travelAgency
         /* обновление ListBox климат */
         private void updateClimateList()
         {
-            var query = "SELECT Climat FROM Scopes GROUP BY Climat ORDER BY Climat";
-
-            /* пример заполнения */
             var climateList = new List<Obj>();
-            climateList.Add(new Obj(true, "Жаркий"));
-            climateList.Add(new Obj(true, "Теплый"));
-            climateList.Add(new Obj(true, "Тропический"));
-            climateList.Add(new Obj(true, "Умеренный"));
+            SQLite connection = new SQLite();
+
+            var reader = connection.ReadData("SELECT Climat FROM Scopes GROUP BY Climat ORDER BY Climat");
+            while (reader.Read())
+                climateList.Add(new Obj(false, reader.GetString(0)));
+
             ClimateListBox.ItemsSource = climateList;
         }
 
         /* обновление ListBox страны */
         private void updateCountryList()
         {
+            var countryList = new List<Obj>();
+            SQLite connection = new SQLite();
+
             var climateArr = getItemsArr(ClimateListBox);
             var query = string.Format("SELECT Country FROM Scopes WHERE Climat IN {0} GROUP BY Country ORDER BY Country", climateArr);
 
-            /* пример заполнения */
-            var countryList = new List<Obj>();
-            countryList.Add(new Obj(true, "Кипр"));
-            countryList.Add(new Obj(true, "Россия"));
-            countryList.Add(new Obj(true, "Тайланд"));
-            countryList.Add(new Obj(false, "Турция"));
+            var reader = connection.ReadData(query);
+            while (reader.Read())
+                countryList.Add(new Obj(false, reader.GetString(0)));
+
             CountryListBox.ItemsSource = countryList;
         }
 
         /* обновление ListBox отели */
         private void updateHotelList()
         {
+            var hotelList = new List<Obj>();
+            SQLite connection = new SQLite();
+
             var climateArr = getItemsArr(ClimateListBox);
             var countriesArr = getItemsArr(CountryListBox);
             var query = string.Format("SELECT Hotel FROM Scopes WHERE Climat IN {0} AND Country IN {1} GROUP BY Hotel ORDER BY Hotel", climateArr, countriesArr);
 
-            /* пример заполнения */
-            var hotelList = new List<Obj>();
-            hotelList.Add(new Obj(true, "Chamuva Garden 4*"));
-            hotelList.Add(new Obj(false, "Kings Palace Luxury 5*"));
-            hotelList.Add(new Obj(true, "SunShine Beach 5*"));
-            hotelList.Add(new Obj(true, "Санаторий Красный Яр 3*"));
+            var reader = connection.ReadData(query);
+            while (reader.Read())
+                hotelList.Add(new Obj(false, reader.GetString(0)));
+
             HotelListBox.ItemsSource = hotelList;
         }
 
         /* обновление списка маршрутов */
         private void updateRoutesList()
         {
+            routesList.Items.Clear();
+
             // считываем идентификаторы отмеченных элементов листбоксов
             var climateArr = " AND Climat IN " + getItemsArr(ClimateListBox);
             var countriesArr = " AND Country IN " + getItemsArr(CountryListBox);
-            var hotelsArr = " AND Hotels IN " + getItemsArr(HotelListBox);
+            var hotelsArr = " AND Hotel IN " + getItemsArr(HotelListBox);
 
             // считываем диапазон длительности
             var duration = "";
@@ -142,10 +145,10 @@ namespace travelAgency
             var query = string.Format("SELECT ID, Country, Climat, Hotel, Duration, Cost FROM Scopes WHERE 1 {0} {1} {2} {3} {4}",
                 climateArr, countriesArr, hotelsArr, duration, cost);
 
-            /* пример заполнения */
-            routesList.Items.Add(new Route(1, "Умеренный", "Россия", "Санаторий Красный Яр 3*", 14, 25000));
-            routesList.Items.Add(new Route(2, "Тропический", "Тайланд", "Kings Palace Luxury 5*", 7, 45000));
-            routesList.Items.Add(new Route(3, "Тропический", "Турция", "SunShine Beach 5*", 10, 35000));
+            SQLite connection = new SQLite();
+            var reader = connection.ReadData(query);
+            while (reader.Read())
+                routesList.Items.Add(new Route(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetInt32(4), reader.GetFloat(5)));
         }
 
         /* изменение ListBox климат */
@@ -173,7 +176,7 @@ namespace travelAgency
             }
             else
             {
-                MessageBox.Show("Маршрут не выбран!");
+                MessageBox.Show("Маршрут не выбран!", "Предупреждение", MessageBoxButton.OK);
             }
         }
 
@@ -207,7 +210,7 @@ namespace travelAgency
                 {
                     if (arr.Length != 1)
                         arr += ",";
-                    arr += listBoxItem.Title;
+                    arr += "'" + listBoxItem.Title + "'";
                 }
             return arr += ")";
         }

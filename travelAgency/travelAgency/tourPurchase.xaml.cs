@@ -35,5 +35,10 @@ namespace travelAgency
         {
 
         }
+
+        private void tours_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            routesWindow.Close();
+        }
     }
 }

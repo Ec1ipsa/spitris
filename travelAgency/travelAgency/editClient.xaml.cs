@@ -38,11 +38,11 @@ namespace travelAgency
                 {
                     surnameBox.Text = reader.GetString(0);
                     nameBox.Text = reader.GetString(1);
-                    if (reader.GetString(2).Count() != 0)
+                    if (reader.GetString(2) != "")
                         secnameBox.Text = reader.GetString(2);
-                    if (reader.GetString(3).Count() != 0)
+                    if (reader.GetString(3) != "")
                         adressBox.Text = reader.GetString(3);
-                    if (reader.GetString(4).Count() != 0)
+                    if (reader.GetString(4) != "")
                         phoneBox.Text = reader.GetString(4); 
                 }
             }
