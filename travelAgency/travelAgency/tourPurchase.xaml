@@ -63,7 +63,7 @@
 
         <TextBox x:Name="countBox" Grid.Column="2" Grid.Row="4" 
             Height="30" VerticalAlignment="Bottom" 
-            Padding="5,3,5,3" FontSize="14"/>
+            Padding="5,3,5,3" FontSize="14" TextChanged="countBox_TextChanged"/>
 
         <!-- discount -->
         <Label Grid.Column="4" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 

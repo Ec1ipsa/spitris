@@ -4,7 +4,7 @@ using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 
-namespace travelAgency
+namespace travelAgency.HelpClasses
 {
     class SQLite
     {
@@ -36,6 +36,11 @@ namespace travelAgency
             //connection.Open();
             this.query = new SQLiteCommand(query, connection);
             this.query.ExecuteNonQuery();
+            Close();
+        }
+        //закрытие подключения
+        public void Close()
+        {
             connection.Close();
         }
         //получение объекта для изменения

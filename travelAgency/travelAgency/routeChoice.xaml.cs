@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using travelAgency.HelpClasses;
 
 namespace travelAgency
 {
@@ -40,25 +41,25 @@ namespace travelAgency
         }
 
         /* класс маршрут */
-        private class Route
-        {
-            public int Id { get; set; }
-            public string Climate { get; set; }
-            public string Country { get; set; }
-            public string Hotel { get; set; }
-            public int Duration { get; set; }
-            public float Cost { get; set; }
+        //private class Route
+        //{
+        //    public int Id { get; set; }
+        //    public string Climate { get; set; }
+        //    public string Country { get; set; }
+        //    public string Hotel { get; set; }
+        //    public int Duration { get; set; }
+        //    public float Cost { get; set; }
 
-            public Route(int id, string climate, string country, string hotel, int duration, float cost)
-            {
-                Id = id;
-                Climate = climate;
-                Country = country;
-                Hotel = hotel;
-                Duration = duration;
-                Cost = cost;
-            }
-        }
+        //    public Route(int id, string climate, string country, string hotel, int duration, float cost)
+        //    {
+        //        Id = id;
+        //        Climate = climate;
+        //        Country = country;
+        //        Hotel = hotel;
+        //        Duration = duration;
+        //        Cost = cost;
+        //    }
+        //}
 
         /* инициализация */
         public routeChoice(int clientId, string clientName, Clients clientsWindow)
