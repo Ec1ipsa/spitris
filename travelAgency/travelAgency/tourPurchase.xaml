@@ -3,86 +3,128 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:toolkit="http://schemas.microsoft.com/wpf/2008/toolkit"
         xmlns:local="clr-namespace:travelAgency"
         mc:Ignorable="d"
         Title="Покупка тура" 
-        Height="400" Width="850" MinHeight="400" MinWidth="850" MaxHeight="800" MaxWidth="900"
+        Height="500" Width="850" MinHeight="500" MinWidth="850" MaxHeight="500" MaxWidth="900"
         WindowStartupLocation="CenterScreen" Closing="tours_Closing" >
-    <Grid>
+
+    <Window.Background>
+        <ImageBrush ImageSource="/images/sun.jpg"></ImageBrush>
+    </Window.Background>
+
+    <Window.Resources>
+        <!-- стиль для констант -->
+        <Style x:Key="labelStyle" TargetType="Label">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Padding" Value="15,0,15,0" />
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+
+        <!-- стиль для такстбоксов -->
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Padding" Value="5,3,5,3" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextAlignment" Value="Right" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid Background="#66FFFFFF">
         <!-- columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
         <!-- rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="33*"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <!-- person -->
-        <Label x:Name="personName" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="0" VerticalAlignment="Bottom" 
-            Height="25" FontSize="14" Padding="0,0,15,0">Продажа тура клиенту: Гилязева Софья Аликовна</Label>
-
+        <!-- ФИО -->
+        <Label x:Name="personName" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="0" Margin="0,10,0,0"
+               Style="{StaticResource labelStyle}" Padding="0" Content="Выбор путевки для клиента: "/>
+        
         <!-- routes -->
-        <ListView x:Name="routesList" Grid.Column="1" Grid.Row="2"
-                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="5">
+        <ListView x:Name="routesList" Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="1"
+                 BorderBrush="#ccc" FontSize="14" Background="#EEFFFFFF">
             <ListView.View>
-                <GridView >
-                    <GridViewColumn Width="150" Header="Страна" DisplayMemberBinding="{Binding Country}" />
+                <GridView>
                     <GridViewColumn Width="175" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
-                    <GridViewColumn Width="110" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
-                    <GridViewColumn Width="240" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
-                    <GridViewColumn Width="110" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
+                    <GridViewColumn Width="140" Header="Страна" DisplayMemberBinding="{Binding Country}" />
+                    <GridViewColumn Width="230" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
+                    <GridViewColumn Width="120" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
+                    <GridViewColumn Width="120" Header="Стоимость" DisplayMemberBinding="{Binding Cost}" />
                 </GridView>
             </ListView.View>
         </ListView>
 
+        <!-- рамка поиска -->
+        <Border Grid.Column="1" Grid.ColumnSpan="7" Grid.Row="3" Grid.RowSpan="3" Margin="0,0,0,50"
+                BorderBrush="#4E87D4" BorderThickness="1" Background="#DDFAFAFA" />
+
         <!-- date -->
-        <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+        <Label Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
             Height="25" FontSize="14" Padding="0,0,15,0">Дата отправления</Label>
 
-        <TextBox x:Name="dateBox" Grid.Column="2" Grid.Row="3" 
+        <!--<toolkit:DatePicker Grid.Column="2" Grid.Row="3" 
+            Height="30" VerticalAlignment="Bottom" Width="241" 
+            Padding="5,3,5,3" FontSize="14"/>-->
+
+        <TextBox x:Name="dateBox" Grid.Column="3" Grid.Row="3" 
             Height="30" VerticalAlignment="Bottom" 
             Padding="5,3,5,3" FontSize="14"/>
 
         <!-- count -->
-        <Label Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+        <Label Grid.Column="2" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
             Height="25" FontSize="14" Padding="0,0,15,0">Количество</Label>
 
-        <TextBox x:Name="countBox" Grid.Column="2" Grid.Row="4" 
+        <TextBox x:Name="countBox" Grid.Column="3" Grid.Row="4" 
             Height="30" VerticalAlignment="Bottom" 
             Padding="5,3,5,3" FontSize="14" TextChanged="countBox_TextChanged"/>
 
         <!-- discount -->
-        <Label Grid.Column="4" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+        <Label Grid.Column="5" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
             Height="25" FontSize="14" Padding="0,0,15,0">Скидка</Label>
 
-        <TextBox x:Name="discountBox" Grid.Column="5" Grid.Row="3" 
+        <TextBox x:Name="discountBox" Grid.Column="6" Grid.Row="3" 
             Height="30" VerticalAlignment="Bottom" 
             Padding="5,3,5,3" FontSize="14"/>
 
         <!-- price -->
-        <Label Grid.Column="4" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+        <Label Grid.Column="5" Grid.Row="4" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
             Height="25" FontSize="14" Padding="0,0,15,0">Стоимость</Label>
 
-        <TextBox x:Name="priceBox" Grid.Column="5" Grid.Row="4" 
+        <TextBox x:Name="priceBox" Grid.Column="6" Grid.Row="4" 
             Height="30" VerticalAlignment="Bottom" 
             Padding="5,3,5,3" FontSize="14"/>
 
-        <Button x:Name="sellTourBtn" Grid.Column="5" Grid.Row="5" 
-            Width="110" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+        <Button x:Name="backBtn" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5" 
+            Width="120" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+            FontSize="14" Click="backBtn_Click">Назад</Button>
+
+        <Button x:Name="sellTourBtn" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="5" 
+            Width="120" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
             FontSize="14" Click="sellTourBtn_Click">Продать</Button>
     </Grid>
 </Window>

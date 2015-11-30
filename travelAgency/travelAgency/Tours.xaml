@@ -8,7 +8,12 @@
         Title="Проданные путевки"
         Height="600" Width="850" MinHeight="600" MinWidth="850" MaxHeight="800" MaxWidth="900"
         WindowStartupLocation="CenterScreen" Closing="tours_Closing">
-    <Grid>
+    
+    <Window.Background>
+        <ImageBrush ImageSource="/images/beach.jpg"></ImageBrush>
+    </Window.Background>
+
+    <Grid Background="#66FFFFFF">
         <!-- columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
@@ -26,7 +31,7 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="toursList" Grid.Column="1" Grid.Row="1"
+        <ListView x:Name="toursList" Grid.Column="1" Grid.Row="1" Background="#EEFFFFFF"
                  BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4">
             <ListView.View>
                 <GridView >

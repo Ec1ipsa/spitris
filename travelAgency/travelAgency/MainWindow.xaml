@@ -8,8 +8,14 @@
         Title="Главное меню" 
         Width="275" Height="200" MinWidth="275" MinHeight="200" MaxWidth="275" MaxHeight="200" 
         WindowStartupLocation="CenterScreen">
-    <Grid>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF00FFF3"/>
+            <GradientStop Color="#FFFFFF36" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
 
+    <Grid Background="#66FFFFFF">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="*"/>
@@ -25,15 +31,15 @@
         </Grid.RowDefinitions>
 
         <Button x:Name="ClientsBtn" Grid.Column="1" Grid.Row="0" 
-            Width="135" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
             FontSize="14" Click="ClientsBtn_Click">Клиенты</Button>
 
         <Button x:Name="RoutesBtn" Grid.Column="1" Grid.Row="1" 
-            Width="135" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
             FontSize="14" Click="RoutesBtn_Click">Маршруты</Button>
 
         <Button x:Name="TicketsBtn" Grid.Column="1" Grid.Row="2" 
-            Width="135" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
+            Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Bottom" 
             FontSize="14" Click="TicketsBtn_Click">Проданные путевки</Button>
     </Grid>
 </Window>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,7 +23,7 @@ namespace travelAgency
         private readonly routeChoice routesWindow;
         private readonly int routeId;
         private readonly int clientId;
-
+        private bool isBack = false;
 
         public tourPurchase(int routeId, routeChoice routesWindow, int clientId)
         {
@@ -43,14 +44,14 @@ namespace travelAgency
             while (reader.Read())
             {
                 Route route = new Route(
-                    routeId, 
-                    reader.GetString(0), 
-                    reader.GetString(1), 
-                    reader.GetString(2), 
-                    reader.GetInt32(3), 
+                    routeId,
+                    reader.GetString(0),
+                    reader.GetString(1),
+                    reader.GetString(2),
+                    reader.GetInt32(3),
                     reader.GetFloat(4));
                 routesList.Items.Add(route);
-           
+
             }
             connection.Close();
         }
@@ -69,7 +70,7 @@ namespace travelAgency
                 else
                 {
                     MessageBox.Show("В поле \"Стоимость\" должно быть введено число!", "Предупреждение", MessageBoxButton.OK);
-                } 
+                }
             }
             else
             {
@@ -99,11 +100,17 @@ namespace travelAgency
             }
         }
 
-       
-
         private void tours_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            routesWindow.Close();
+            if (!isBack)
+                routesWindow.Close();
+        }
+
+        private void backBtn_Click(object sender, RoutedEventArgs e)
+        {
+            isBack = true;
+            Close();
+            routesWindow.Show();
         }
     }
 }
