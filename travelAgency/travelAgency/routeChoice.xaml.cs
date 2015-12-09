@@ -187,6 +187,18 @@ namespace travelAgency
             updateRoutesList();
         }
 
+        /* сбросить фильтры поиска */
+        private void resetBtn_Click(object sender, RoutedEventArgs e)
+        {
+            updateClimateList();
+            updateCountryList();
+            updateHotelList();
+            minDurationBox.Text = "";
+            maxDurationBox.Text = "";
+            minCostBox.Text = "";
+            maxCostBox.Text = "";
+        }
+
         /* вернуться назад к выбору клиентов */
         private void BackBtn_Click(object sender, RoutedEventArgs e)
         {

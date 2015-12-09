@@ -127,6 +127,12 @@
         <TextBox x:Name="minCostBox" Grid.Column="8" Grid.Row="4" Style="{StaticResource textBoxStyle}" Margin="0,10"/>
         <TextBox x:Name="maxCostBox" Grid.Column="9" Grid.Row="4" Style="{StaticResource textBoxStyle}" Margin="0,10"/>
 
+
+        <!-- кнопка сброса -->
+        <Button x:Name="resetBtn" Grid.Column="8" Grid.Row="5" 
+            Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+            FontSize="14" Click="resetBtn_Click">Сброс</Button>
+
         <!-- кнопка поиска -->
         <Button x:Name="findRouteBtn" Grid.Column="9" Grid.Row="5" 
             Width="80" Height="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" 

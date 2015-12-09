@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:travelAgency"
         mc:Ignorable="d"
         Title="Проданные путевки"
-        Height="600" Width="850" MinHeight="600" MinWidth="850" MaxHeight="800" MaxWidth="900"
+        Height="600" Width="950" MinHeight="600" MinWidth="950" MaxHeight="800" MaxWidth="950"
         WindowStartupLocation="CenterScreen" Closing="tours_Closing">
-    
+
     <Window.Background>
         <ImageBrush ImageSource="/images/beach.jpg"></ImageBrush>
     </Window.Background>
 
-    <Grid Background="#66FFFFFF">
+    <Grid Background="#88FFFFFF">
         <!-- columns -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
@@ -27,7 +27,9 @@
         <!-- rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="478*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -37,8 +39,8 @@
                 <GridView >
                     <GridViewColumn Width="Auto" Header="Клиент" DisplayMemberBinding="{Binding Client}" />
                     <GridViewColumn Width="Auto" Header="Страна" DisplayMemberBinding="{Binding Country}" />
-                    <GridViewColumn Width="Auto" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
                     <GridViewColumn Width="Auto" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
+                    <GridViewColumn Width="Auto" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />                    
                     <GridViewColumn Width="Auto" Header="Дата отправления" DisplayMemberBinding="{Binding Date}" />
                     <GridViewColumn Width="Auto" Header="Количество" DisplayMemberBinding="{Binding Count}" />
                     <GridViewColumn Width="Auto" Header="Скидка" DisplayMemberBinding="{Binding Discount}" />
@@ -46,5 +48,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
+
+        <Button x:Name="BackBtn" Grid.Column="1" Grid.Row="3" 
+            Width="110" Height="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" 
+            FontSize="14" Click="BackBtn_Click">Назад</Button>
     </Grid>
 </Window>

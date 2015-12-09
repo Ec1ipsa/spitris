@@ -70,7 +70,7 @@
                  BorderBrush="#ccc" FontSize="14" Background="#EEFFFFFF">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="175" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
+                    <GridViewColumn Width="170" Header="Климат" DisplayMemberBinding="{Binding Climate}" />
                     <GridViewColumn Width="140" Header="Страна" DisplayMemberBinding="{Binding Country}" />
                     <GridViewColumn Width="230" Header="Отель" DisplayMemberBinding="{Binding Hotel}" />
                     <GridViewColumn Width="120" Header="Длительность" DisplayMemberBinding="{Binding Duration}" />
@@ -87,9 +87,9 @@
         <Label Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
             Height="25" FontSize="14" Padding="0,0,15,0">Дата отправления</Label>
 
-        <!--<toolkit:DatePicker Grid.Column="2" Grid.Row="3" 
-            Height="30" VerticalAlignment="Bottom" Width="241" 
-            Padding="5,3,5,3" FontSize="14"/>-->
+        <!--<toolkit:DatePicker x:Name="datepicker" Grid.Column="3" Grid.Row="5" 
+            Height="30" VerticalAlignment="Bottom" 
+            Padding="5,3,5,3" FontSize="14" />-->
 
         <TextBox x:Name="dateBox" Grid.Column="3" Grid.Row="3" 
             Height="30" VerticalAlignment="Bottom" 

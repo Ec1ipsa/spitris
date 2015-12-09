@@ -29,6 +29,8 @@ namespace travelAgency
         {
             InitializeComponent();
 
+            //datepicker.SelectedDate = DateTime.Now;
+
             this.routesWindow = routesWindow;
             this.routeId = routeId;
             this.clientId = clientId;
@@ -63,9 +65,9 @@ namespace travelAgency
             {
                 if (Check.checkFloatNumber(priceBox.Text))
                 {
-
                     connection.WriteData(string.Format("INSERT INTO Tours (SID, CID, Date, Count, Discount, Price) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", routeId, clientId, dateBox.Text, int.Parse(countBox.Text), discountBox.Text, float.Parse(priceBox.Text)));
                     MessageBox.Show("Путевка успешно добавлена!", "Предупреждение", MessageBoxButton.OK);
+                    Close();
                 }
                 else
                 {
@@ -80,9 +82,13 @@ namespace travelAgency
 
         private bool checkFull()
         {
-            if (Check.checkFullItem(dateBox) && Check.checkFullItem(countBox) && Check.checkFullItem(discountBox) && Check.checkFullItem(priceBox))
-                return true;
-            return false;
+            bool flag = true;
+            if (!Check.checkFullItem(dateBox)) flag = false;
+            if (!Check.checkFullItem(countBox)) flag = false;
+            if (!Check.checkFullItem(priceBox)) flag = false;
+            
+            return flag;
+            
         }
 
         private void countBox_TextChanged(object sender, TextChangedEventArgs e)

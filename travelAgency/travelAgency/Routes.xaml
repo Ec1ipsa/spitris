@@ -34,7 +34,7 @@
         </Grid.RowDefinitions>
 
         <ListView x:Name="routesList" Grid.Column="1" Grid.Row="1" Background="#EEFFFFFF"
-                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4" MouseDoubleClick="EditRouteBtn_Click">
+                 BorderBrush="#ccc" FontSize="14" Grid.ColumnSpan="4">
             <ListView.View>
                 <GridView >
                     <GridViewColumn Width="175" Header="Климат" DisplayMemberBinding="{Binding Climate}" />

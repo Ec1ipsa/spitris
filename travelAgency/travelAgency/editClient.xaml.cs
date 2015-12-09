@@ -77,9 +77,13 @@ namespace travelAgency
         //проверка всех текстбоксов на пустоту
         private bool checkFull()
         {
-            if (Check.checkFullItem(surnameBox) && Check.checkFullItem(nameBox) && Check.checkFullItem(secnameBox) && Check.checkFullItem(phoneBox) && Check.checkFullItem(adressBox))
-                return true;
-            return false;
+            bool flag = true;
+            if (!Check.checkFullItem(surnameBox)) flag = false;
+            if (!Check.checkFullItem(nameBox)) flag = false;
+            if (!Check.checkFullItem(secnameBox)) flag = false;
+            if (!Check.checkFullItem(adressBox)) flag = false;
+            if (!Check.checkFullItem(phoneBox)) flag = false;
+            return flag;
         }
 
         /* отмена редактирования клиента */

@@ -90,5 +90,10 @@ namespace travelAgency
         {
             mainWindow.Show();
         }
+
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -94,16 +94,17 @@ namespace travelAgency
         {
             Close();
         }
-
-        
-
         
         //проверить все текстбоксы на пустоту
         private bool checkFull()
         {
-            if (Check.checkFullItem(countryBox) && Check.checkFullItem(climateBox) && Check.checkFullItem(durationBox) && Check.checkFullItem(hotelBox) && Check.checkFullItem(costBox))
-                return true;
-            return false;
+            bool flag = true;
+            if (!Check.checkFullItem(countryBox)) flag = false;
+            if (!Check.checkFullItem(climateBox)) flag = false;
+            if (!Check.checkFullItem(durationBox)) flag = false;
+            if (!Check.checkFullItem(hotelBox)) flag = false;
+            if (!Check.checkFullItem(costBox)) flag = false;
+            return flag;
         }
         
     }

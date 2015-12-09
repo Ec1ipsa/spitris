@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace travelAgency.HelpClasses
 {
@@ -34,11 +35,12 @@ namespace travelAgency.HelpClasses
         {
             if (item.Text != "")
             {
+                item.BorderBrush = new SolidColorBrush(Color.FromRgb(171, 173, 179));
                 return true;
             }
             else
             {
-                //поменять цвет
+                item.BorderBrush = new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 return false;
             }
         }
